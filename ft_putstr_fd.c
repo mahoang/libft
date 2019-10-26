@@ -6,7 +6,7 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 12:08:39 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/11 13:35:15 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/21 13:28:01 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	ft_putstr_fd(char *s, int fd)
 	size_t c;
 
 	c = 0;
-	while (s[c])
+	if ((s && fd))
 	{
-		write(fd, &s[c], 1);
-		c++;
+		while (s[c])
+		{
+			write(fd, &s[c], 1);
+			c++;
+		}
 	}
 }

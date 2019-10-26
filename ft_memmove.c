@@ -6,11 +6,10 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:05:43 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/14 13:52:03 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/22 16:11:49 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -26,7 +25,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		return (NULL);
 	if (dest > src)
 	{
-		while (c++ <= n)
+		while (c++ < n)
 			sdest[n - c] = ssrc[n - c];
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 12:05:52 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/18 13:22:45 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/24 17:34:41 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char			*ft_itoa(int n)
 	count = ft_len(n);
 	if (minus == 1)
 		count++;
-	nb = malloc(sizeof(char) * count + 1);
+	if (!(nb = malloc(sizeof(char) * count + 1)))
+		return (NULL);
 	nb = ft_transform(n, count, minus, nb);
 	return (nb);
 }

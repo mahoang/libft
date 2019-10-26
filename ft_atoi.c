@@ -6,13 +6,13 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 15:29:06 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/18 14:19:06 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/26 15:40:25 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	long int	c;
 	long int	d;

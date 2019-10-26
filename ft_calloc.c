@@ -6,7 +6,7 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 13:04:27 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/18 14:15:30 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/22 15:08:56 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*result;
 
+	if (size == 0 || count == 0)
+	{
+		size = 1;
+		count = 1;
+	}
 	if (!(result = malloc(size * count)))
 		return (NULL);
-	ft_memset(result, 0, count);
+	ft_bzero(result, count * size);
 	return (result);
 }

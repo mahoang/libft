@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 13:20:47 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/22 17:51:48 by mahoang          ###   ########.fr       */
+/*   Created: 2019/10/20 22:31:34 by mahoang           #+#    #+#             */
+/*   Updated: 2019/10/23 21:31:59 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *dest, const char *src, size_t size)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned char	*sdest;
-	unsigned char	*ssrc;
-	size_t			c;
+	t_list	*map;
+	t_list	*temp;
 
-	sdest = (unsigned char*)dest;
-	ssrc = (unsigned char*)src;
-	c = 0;
-	if (src == NULL && dest == NULL)
-		return (0);
-	while (c < size)
+	if (!lst || !f || !del)
+		return (NULL);
+	if (!(temp = ft_lstnew(f(lst->content))))
+		return (NULL);
+	map = temp;
+	lst = lst->next;
+	while (lst)
 	{
-		if (sdest[c] != ssrc[c] || ssrc[c] == '\0')
-			return (sdest[c] - ssrc[c]);
-		c++;
+		if (!(temp->next = ft_lstnew(f(lst->content))))
+		{
+			ft_lstclear(&map, del);
+			return (NULL);
+		}
+		temp = temp->next;
+		lst = lst->next;
 	}
-	return (0);
+	return (map);
 }

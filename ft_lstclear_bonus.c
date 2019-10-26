@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 13:20:47 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/22 17:51:48 by mahoang          ###   ########.fr       */
+/*   Created: 2019/10/20 22:11:57 by mahoang           #+#    #+#             */
+/*   Updated: 2019/10/23 20:47:30 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *dest, const char *src, size_t size)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	unsigned char	*sdest;
-	unsigned char	*ssrc;
-	size_t			c;
+	t_list	*temp;
 
-	sdest = (unsigned char*)dest;
-	ssrc = (unsigned char*)src;
-	c = 0;
-	if (src == NULL && dest == NULL)
-		return (0);
-	while (c < size)
+	if (!lst || !*lst || !del)
+		return ;
+	if (lst)
 	{
-		if (sdest[c] != ssrc[c] || ssrc[c] == '\0')
-			return (sdest[c] - ssrc[c]);
-		c++;
+		while (*lst)
+		{
+			temp = (*lst)->next;
+			del((*lst)->content);
+			free(*lst);
+			(*lst) = temp;
+		}
+		*lst = NULL;
 	}
-	return (0);
 }

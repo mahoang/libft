@@ -6,7 +6,7 @@
 /*   By: mahoang <mahoang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:01:10 by mahoang           #+#    #+#             */
-/*   Updated: 2019/10/18 13:25:59 by mahoang          ###   ########.fr       */
+/*   Updated: 2019/10/26 13:51:25 by mahoang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,36 @@ static	char	*malloc_w(const char *s, char sep)
 	return (temp);
 }
 
+static	void	*ft_free(int c, char **splitted)
+{
+	while (--c >= 0)
+		free(splitted[c]);
+	free(splitted);
+	return (NULL);
+}
+
 char			**ft_split(const char *s, char sep)
 {
 	int		c;
 	char	**splitted;
-	char	*str;
 
-	str = ((char*)s);
+	if (!(s))
+		return (NULL);
 	c = count_str(s, sep);
 	if (!(splitted = (malloc(sizeof(char*) * (c + 1)))))
 		return (0);
 	c = 0;
-	while (*str)
+	while (*s)
 	{
-		while (*str && *str == sep)
+		while (*s && *s == sep)
+			s++;
+		if (*s && *s != sep)
 		{
-			str++;
-		}
-		if (*str && *str != sep)
-		{
-			splitted[c] = malloc_w(str, sep);
+			if (!(splitted[c] = malloc_w(s, sep)))
+				ft_free(c, splitted);
 			c++;
-			while (*str && *str != sep)
-				str++;
+			while (*s && *s != sep)
+				s++;
 		}
 	}
 	splitted[c] = 0;
